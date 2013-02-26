@@ -85,12 +85,14 @@ class Exterminator {
 	 */
 	private static function dump($data)
 	{
-		echo static::css();
-		echo static::openPanel();
+		$html = static::css();
+		$html .= static::openPanel();
 
-		echo '<pre>';
-		var_dump($data);
-		echo '</pre></div>' . "\n";
+		$html .= '<pre>';
+		$html .= static::varDump($data);
+		$html .= '</pre></div></div>' . "\n";
+
+		echo $html;
 	}
 
 	/**
@@ -113,16 +115,27 @@ class Exterminator {
 		if (!is_bool($authorized)) return $authorized;
 
 		if ($authorized && !empty(static::$debugData)) {
-			echo static::css();
-			echo static::openPanel();
-			echo '<a href="" class="toggle-debug">Hide</a>' . "\n";
+			$html = static::css();
+			$html .= static::openPanel(true);
 			foreach (static::$debugData as $data) {
-				echo '<pre>' . "\n";
-				echo static::varDump($data);
-				echo '</pre>' . "\n";
+				$html .= '<pre>' . "\n";
+				$html .= static::varDump($data);
+				$html .= '</pre>' . "\n";
 			}
-			echo '</div>' . "\n";
-			echo static::js();
+			foreach (static::$debugData as $data) {
+				$html .= '<pre>' . "\n";
+				$html .= static::varDump($data);
+				$html .= '</pre>' . "\n";
+			}
+			foreach (static::$debugData as $data) {
+				$html .= '<pre>' . "\n";
+				$html .= static::varDump($data);
+				$html .= '</pre>' . "\n";
+			}
+			$html .= '</div></div>' . "\n";
+			$html .= static::js();
+
+			echo $html;
 		}
 	}
 
@@ -144,12 +157,15 @@ class Exterminator {
 	/**
 	 * Creates the debug panel opening markup.
 	 *
+	 * @param  boolean  $var
 	 * @return string
 	 */
-	private static function openPanel()
+	private static function openPanel($hideButton = false)
 	{
 		$html = '<div class="debug"><div class="debug-bg"></div>' . "\n";
 		$html .= '<h1>Exterminator</h1>' . "\n";
+		if ($hideButton) $html .= '<a href="" class="toggle-debug">Hide</a>' . "\n";
+		$html .= '<div class="area">';
 		return $html;
 	}
 
@@ -161,9 +177,10 @@ class Exterminator {
 	private static function css()
 	{
 		if (!static::$shownCss) {
-			$html = '<style type="text/css">' . "\n";;
-			$html .= 'div.debug { z-index: 10800; position: fixed; top: 80px; right: 36px; min-width: 560px; max-width: 980px; min-height: 24px;';
-			$html .= 'font-family: Arial, Helvetica, sans-serif; }';
+			$html = '<style type="text/css">' . "\n";
+			$html .= 'div.debug { z-index: 10800; position: fixed; top: 40px; right: 36px; ';
+			$html .= 'min-width: 560px; max-width: 980px; min-height: 24px; font-family: Arial, Helvetica, sans-serif; }';
+			$html .= 'div.debug div.area { position: relative; z-index: 5; margin: 18px 2px 8px 0; padding-right: 4px; max-height: 680px; overflow-y: scroll; }';
 			$html .= 'div.debug div.debug-bg { position: absolute; opacity: 0.9; width: 100%; height: 100%; background-color: #000;';
 			$html .= '-moz-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; }';
 			$html .= 'div.debug:hover div.debug-bg { opacity: 0.97; }';
@@ -172,7 +189,7 @@ class Exterminator {
 			$html .= 'border: 1px solid #888; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; }';
 			$html .= 'div.debug a.toggle-debug.show { background-color: #060; }';
 			$html .= 'div.debug a.toggle-debug:hover { background-color: #fff; color: #000; }';
-			$html .= 'div.debug h1 { position: absolute; top: -8px; left: 0; background: none; color: #700; ';
+			$html .= 'div.debug h1 { position: absolute; top: -8px; left: 0; margin: 0; background: none; color: #700; ';
 			$html .= 'font-family: Arial, Helvetica, sans-serif; font-size: 18px; font-weight: normal; font-style: italic; ';
 			$html .= 'text-shadow: #000 0 0 5px; }';
 			$html .= 'div.debug pre { position: relative; margin: 12px 6px; padding: 10px; ';
@@ -194,8 +211,8 @@ class Exterminator {
 			$html .= '$("a.toggle-debug").click(function(e){' . "\n";
 			$html .= 'e.preventDefault();' . "\n";
 			$html .= 'if ($(this).text() == "Hide") {' . "\n";
-			$html .= '$(this).parents("div.debug").children("pre").fadeOut("fast"); $(this).addClass("show").text("Show");' . "\n";
-			$html .= '} else { $(this).parents("div.debug").children("pre").fadeIn("fast"); ';
+			$html .= '$("div.debug pre").fadeOut("fast"); $(this).addClass("show").text("Show");' . "\n";
+			$html .= '} else { $("div.debug pre").fadeIn("fast"); ';
 			$html .= '$(this).removeClass("show").text("Hide"); }' . "\n";
 			$html .= '});' . "\n";
 			$html .= '</script>' . "\n";
