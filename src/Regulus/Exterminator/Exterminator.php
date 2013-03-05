@@ -122,16 +122,6 @@ class Exterminator {
 				$html .= static::varDump($data);
 				$html .= '</pre>' . "\n";
 			}
-			foreach (static::$debugData as $data) {
-				$html .= '<pre>' . "\n";
-				$html .= static::varDump($data);
-				$html .= '</pre>' . "\n";
-			}
-			foreach (static::$debugData as $data) {
-				$html .= '<pre>' . "\n";
-				$html .= static::varDump($data);
-				$html .= '</pre>' . "\n";
-			}
 			$html .= '</div></div>' . "\n";
 			$html .= static::js();
 
