@@ -40,6 +40,8 @@ To enable Exterminator, navigate to `http://site.com/debug/debug1913`. This will
 
 **Basic usage:**
 
+To display a variable after you have set your `debug` cookie:
+
 	$var = array(
 		'boolean' => true,
 		'number'  => 3.43,
@@ -47,18 +49,16 @@ To enable Exterminator, navigate to `http://site.com/debug/debug1913`. This will
 	);
 	Dbg::display($var);
 
-To display a variable after you have set your `debug` cookie, try the above code. This is the most basic usage.
-
 **Displaying multiple variables:**
 
-To display multiple variables, first use Exterminator's "add" method, `Dbg::a()`:
+To display multiple variables, use Exterminator's "add" method, `Dbg::a()`:
 
 	Dbg::a($var);
 	Dbg::a($var2);
 
 Then at in the footer of your website add a simple `Dbg::display()` with no arguments:
 
-			Dbg::display();
+			<?php Dbg::display(); ?>
 		</body>
 	</html>
 
