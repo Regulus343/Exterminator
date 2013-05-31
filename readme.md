@@ -79,3 +79,7 @@ You can get the variable names to show up in the upper-right area of an outputte
 
 	Dbg::a($var, $definedVars);
 	Dbg::a($var2, $definedVars);
+
+You can also do it manually if the "add" method's second argument is a string:
+
+	Dbg::a($var, 'var');

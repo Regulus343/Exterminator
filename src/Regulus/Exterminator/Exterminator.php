@@ -205,14 +205,14 @@ class Exterminator {
 					$type = "string";
 					$quotes = '"';
 				}
-				static::$varDumpHTML .= '<div><span class="var-key">['.$quotes.'<span class="var-'.$type.'">'.$key.'</span>'.$quotes.']</span> => ';
+				static::$varDumpHTML .= '<div class="var-line"><span class="var-key">['.$quotes.'<span class="var-'.$type.'">'.$key.'</span>'.$quotes.']</span> => ';
 				if (is_object($value) || is_array($value)) {
 					//static::$varDumpHTML .= '<div>';
 					static::cycleVarDumpHTML($value);
 				} else {
 					static::cycleNonArrayVarDumpHTML($value);
 				}
-				static::$varDumpHTML .= '</div>';
+				static::$varDumpHTML .= '</div><!-- /var-line -->' . "\n";
 			}
 			static::$varDumpHTML .= '</div><!-- /var-area -->' . "\n" . '}';
 		} else {
@@ -231,17 +231,18 @@ class Exterminator {
 		if (is_bool($var)) {
 			$var = $var ? 'true' : 'false';
 			$type = "bool-".$var;
+			$suffix = ' <small>(bool)</small>';
 		} else if (is_int($var) || is_float($var)) {
 			$type = "numeric";
 			if (is_int($var)) {
-				$suffix = ' (int)';
+				$suffix = ' <small>(int)</small>';
 			} else {
-				$suffix = ' (float)';
+				$suffix = ' <small>(float)</small>';
 			}
 		} else {
 			$type = "string";
 			$quotes = '"';
-			$suffix = ' '.$type.'(<span class="var-length">'.strlen($var).'</span>)';
+			$suffix = ' <small>'.$type.'(<span class="var-length">'.strlen($var).'</span>)</small>';
 		}
 		static::$varDumpHTML .= $quotes.'<span class="var-'.$type.'">'.$var.'</span>'.$quotes.$suffix;
 	}
@@ -311,6 +312,10 @@ class Exterminator {
 	 */
 	public static function varName(&$var, &$definedVars)
 	{
+		//allow developer to manually pass the variable name as a string if necessary
+		if (is_string($definedVars)) return $definedVars;
+
+		//loop through variables to see if they are equal to the variable being tested
 		foreach ($definedVars as $varName => $value) {
 			if ($value === $var) return $varName;
 		}

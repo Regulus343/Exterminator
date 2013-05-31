@@ -1,7 +1,7 @@
 div.debug {
 	z-index: 10800; position: fixed;
 	top: 40px; right: 36px;
-	min-width: 560px; max-width: 980px;
+	min-width: 720px; max-width: 980px;
 	min-height: 26px;
 	font-family: Arial, Helvetica, sans-serif;
 }
@@ -10,7 +10,7 @@ div.debug div.area {
 	z-index: 5; position: relative;
 	margin: 18px 2px 8px 0; padding-right: 4px;
 	max-height: 680px;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 div.debug div.debug-bg {
@@ -61,10 +61,12 @@ div.debug div.var-dump h3 {
 div.debug div.var-dump:hover { border-color: #aaa; }
 div.debug div.var-dump:hover h3 { color: #fff; }
 
-div.debug div.var-dump .var-area { padding-left: 24px; }
+div.debug div.var-dump .var-area { padding-left: 24px; border-left: 1px solid #111; }
 div.debug div.var-dump .var-length { color: yellow; }
 div.debug div.var-dump .var-key { display: inline-block; min-width: 200px; }
 div.debug div.var-dump .var-bool-true { color: #6bfa32; }
 div.debug div.var-dump .var-bool-false { color: #fc3330; }
 div.debug div.var-dump .var-numeric { color: #8adeff; }
-div.debug div.var-dump .var-string:hover { color: #ffd1e7; }
+div.debug div.var-dump .var-string { color: #ffefbf; }
+div.debug div.var-dump .var-string:hover { color: #ffe28c; }
+div.debug div.var-dump small { font-size: 0.9em; }
