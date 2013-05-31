@@ -46,6 +46,15 @@ To display a variable after you have set your `debug` cookie:
 		'boolean' => true,
 		'number'  => 3.43,
 		'string'  => 'Testing Exterminator',
+		'array'   => array(
+			'test'   => false,
+			'number' => 5,
+			'object' => (object) array(
+				'Number One',
+				2,
+				3.0,
+			),
+		),
 	);
 	Dbg::display($var);
 
