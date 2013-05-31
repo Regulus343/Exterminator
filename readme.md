@@ -3,7 +3,7 @@ Exterminator
 
 **A simple debugging composer package for Laravel 4 that allows you to output color-coded variable dumps on the screen depending on whether a 'debug' cookie is present.**
 
-Variable dumps are color-coded and just as descriptive as PHP's var_dump() method. You may hide the Exterminator window by clicking the "Hide" button and may single-click on any variable to select it in its entirety. These things help to make Exterminator much nicer to work with than just a crude `var_dump`.
+Variable dumps are color-coded and just as descriptive as PHP's `var_dump()` method. You may hide the Exterminator window by clicking the "Hide" button and may single-click on any variable to select it in its entirety. These things help to make Exterminator much nicer to work with than just a crude `var_dump`.
 
 Using the `Dbg::display()` method, you can dump all of your variables at the end of your view to prevent any data output from breaking your rendered HTML page. They variable output is also contained in HTML markup and use various Javascript methods for enhanced use as described above.
 
