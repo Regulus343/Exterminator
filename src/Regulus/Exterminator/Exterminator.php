@@ -232,8 +232,11 @@ class Exterminator {
 	private static function cycleNonArrayVarDumpHTML($var = false)
 	{
 		$quotes = ""; $suffix = "";
-		if (is_bool($var)) {
-			$var = $var ? 'true' : 'false';
+		if (is_null($var)) {
+			$var = "null";
+			$type = "bool-false";
+		} else if (is_bool($var)) {
+			$var = $var ? "true" : "false";
 			$type = "bool-".$var;
 			$suffix = ' <small>(bool)</small>';
 		} else if (is_int($var) || is_float($var)) {
