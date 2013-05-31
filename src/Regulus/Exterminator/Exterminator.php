@@ -205,7 +205,7 @@ class Exterminator {
 					$type = "string";
 					$quotes = '"';
 				}
-				static::$varDumpHTML .= '<div class="var-line"><span class="var-key">['.$quotes.'<span class="var-'.$type.'">'.$key.'</span>'.$quotes.']</span> => ';
+				static::$varDumpHTML .= '<div class="var-line"><span class="var-key">['.$quotes.'<span class="var-'.$type.'">'.$key.'</span>'.$quotes.']</span> =&gt; ';
 				if (is_object($value) || is_array($value)) {
 					//static::$varDumpHTML .= '<div>';
 					static::cycleVarDumpHTML($value);
