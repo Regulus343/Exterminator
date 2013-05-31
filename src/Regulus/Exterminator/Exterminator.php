@@ -62,7 +62,7 @@ class Exterminator {
 	 */
 	public static function e()
 	{
-		return static::x('Exterminator Enabled!');
+		return static::display('Exterminator Enabled!');
 	}
 
 	/**
@@ -102,7 +102,7 @@ class Exterminator {
 	 * @param  mixed    $data
 	 * @param  array    $definedVars
 	 */
-	public static function a($data, &$definedVars = false)
+	public static function a($data, $definedVars = false)
 	{
 		if ($definedVars) {
 			$varName = static::varName($data, $definedVars);
@@ -113,12 +113,15 @@ class Exterminator {
 	}
 
 	/**
-	 * Prepares debug data for display.
+	 * Prepares debug data for display. You may optionally add a variable to display as well.
 	 *
+	 * @param  mixed    $var
 	 * @return string
 	 */
-	public static function display()
+	public static function display($var = false)
 	{
+		if ($var) static::a($var);
+
 		$authorized = static::authorized();
 		if (!is_bool($authorized)) return $authorized;
 
@@ -130,10 +133,8 @@ class Exterminator {
 				if (!is_numeric($varName)) {
 					$html .= "<h3>$".$varName."</h3>";
 				}
-				$html .= '<pre>' . "\n";
 				$html .= static::varDump($data);
-				//$html .= '</pre>' . "\n";
-				$html .= '</div>' . "\n";
+				$html .= '</div><!-- /var-dump -->' . "\n";
 			}
 			$html .= '</div></div>' . "\n";
 			$html .= static::js();
@@ -158,7 +159,7 @@ class Exterminator {
 			ob_start();
 			var_dump($var);
 			$string = ob_get_clean();
-			return '<pre>'. "\n" . static::entities($string). "\n" . '</pre>' . "\n";
+			return '<pre>'.static::entities($string).'</pre>' . "\n";
 		}
 	}
 
@@ -173,6 +174,11 @@ class Exterminator {
 		static::$varDumpHTML = '';
 		static::cycleVarDumpHTML($var);
 		return static::$varDumpHTML;
+	}
+
+	public static function vars()
+	{
+		return get_defined_vars();
 	}
 
 	/**
@@ -199,14 +205,16 @@ class Exterminator {
 					$type = "string";
 					$quotes = '"';
 				}
-				static::$varDumpHTML .= '<span class="var-key">['.$quotes.'<span class="var-'.$type.'">'.$key.'</span>'.$quotes.']</span> => ';
+				static::$varDumpHTML .= '<div><span class="var-key">['.$quotes.'<span class="var-'.$type.'">'.$key.'</span>'.$quotes.']</span> => ';
 				if (is_object($value) || is_array($value)) {
+					//static::$varDumpHTML .= '<div>';
 					static::cycleVarDumpHTML($value);
 				} else {
 					static::cycleNonArrayVarDumpHTML($value);
 				}
+				static::$varDumpHTML .= '</div>';
 			}
-			static::$varDumpHTML .= '</div><!-- /var-area -->'."\n".'}<br />';
+			static::$varDumpHTML .= '</div><!-- /var-area -->' . "\n" . '}';
 		} else {
 			static::cycleNonArrayVarDumpHTML($var);
 		}
@@ -219,7 +227,7 @@ class Exterminator {
 	 */
 	private static function cycleNonArrayVarDumpHTML($var = false)
 	{
-		$quotes = ""; $prefix = "";
+		$quotes = ""; $suffix = "";
 		if (is_bool($var)) {
 			$var = $var ? 'true' : 'false';
 			$type = "bool-".$var;
@@ -228,9 +236,9 @@ class Exterminator {
 		} else {
 			$type = "string";
 			$quotes = '"';
-			$prefix = $type.'(<span class="var-length">'.strlen($var).'</span>) ';
+			$suffix = ' '.$type.'(<span class="var-length">'.strlen($var).'</span>)';
 		}
-		static::$varDumpHTML .= $prefix.$quotes.'<span class="var-'.$type.'">'.$var.'</span>'.$quotes.'<br />';
+		static::$varDumpHTML .= $quotes.'<span class="var-'.$type.'">'.$var.'</span>'.$quotes.$suffix;
 	}
 
 	/**

@@ -19,6 +19,8 @@ class ExterminatorServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('regulus/exterminator');
+
+		include __DIR__.'/../../routes.php';
 	}
 
 	/**
