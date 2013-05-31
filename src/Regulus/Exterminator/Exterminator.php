@@ -215,7 +215,6 @@ class Exterminator {
 					static::cycleVarDumpHTML($value);
 				} else {
 					static::cycleNonArrayVarDumpHTML($value);
-					static::$varDumpHTML .= '</div><!-- /var-line -->' . "\n";
 				}
 			}
 			static::$varDumpHTML .= '</div><!-- /var-area -->' . "\n";
@@ -250,6 +249,7 @@ class Exterminator {
 			$suffix = ' <small>'.$type.'(<span class="var-length">'.strlen($var).'</span>)</small>';
 		}
 		static::$varDumpHTML .= $quotes.'<span class="var-'.$type.'">'.$var.'</span>'.$quotes.$suffix;
+		static::$varDumpHTML .= '</div><!-- /var-line -->' . "\n";
 	}
 
 	/**
