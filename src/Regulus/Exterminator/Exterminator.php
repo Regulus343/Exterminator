@@ -233,6 +233,11 @@ class Exterminator {
 			$type = "bool-".$var;
 		} else if (is_int($var) || is_float($var)) {
 			$type = "numeric";
+			if (is_int($var)) {
+				$suffix = ' (int)';
+			} else {
+				$suffix = ' (float)';
+			}
 		} else {
 			$type = "string";
 			$quotes = '"';
