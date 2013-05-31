@@ -1,0 +1,70 @@
+div.debug {
+	z-index: 10800; position: fixed;
+	top: 40px; right: 36px;
+	min-width: 560px; max-width: 980px;
+	min-height: 26px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+div.debug div.area {
+	z-index: 5; position: relative;
+	margin: 18px 2px 8px 0; padding-right: 4px;
+	max-height: 680px;
+	overflow-y: scroll;
+}
+
+div.debug div.debug-bg {
+	position: absolute; opacity: 0.9;
+	width: 100%; height: 100%;
+	background-color: #000;
+	border-radius: 8px; -moz-border-radius: 8px; -webkit-border-radius: 8px;
+}
+
+div.debug:hover div.debug-bg { opacity: 0.97; }
+
+div.debug a.toggle-debug {
+	position: absolute;
+	top: -14px; right: 8px;
+	padding: 5px 5px;
+	background-color: #700; color: #fff;
+	border: 1px solid #888; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;
+	font-size: 11px; font-weight: bold; text-decoration: none; line-height: 1em;
+	cursor: pointer;
+}
+
+div.debug a.toggle-debug.show { background-color: #060; }
+div.debug a.toggle-debug:hover { background-color: #fff; color: #000; }
+div.debug h1 {
+	position: absolute;
+	top: 6px; left: 6px;
+	margin: 0;
+	background: none; color: #700;
+	font-family: Arial, Helvetica, sans-serif; font-size: 18px; font-weight: normal; font-style: italic;
+	text-shadow: #000 0 0 5px;
+}
+
+div.debug div.var-dump {
+	position: relative;
+	margin: 12px 6px; padding: 10px;
+	border: 1px solid #555; color: #fff;
+	border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+	font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+}
+div.debug div.var-dump pre { color: #fff; background: none; }
+div.debug div.var-dump h3 {
+	position: absolute;
+	top: 0; right: 5px;
+	color: #ccc;
+	font-size: 15px; font-weight: normal; text-align: right; letter-spacing: 0.08em;
+}
+
+div.debug div.var-dump:hover { border-color: #aaa; }
+div.debug div.var-dump:hover h3 { color: #fff; }
+
+div.debug div.var-dump .var-area { padding-left: 24px; }
+div.debug div.var-dump .var-length { color: yellow; }
+div.debug div.var-dump .var-key { display: inline-block; min-width: 200px; }
+div.debug div.var-dump .var-bool-true { color: #6bfa32; }
+div.debug div.var-dump .var-bool-false { color: #fc3330; }
+div.debug div.var-dump .var-numeric { color: #8adeff; }
+div.debug div.var-dump .var-string:hover { color: #ffd1e7; }

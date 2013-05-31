@@ -1,5 +1,9 @@
 {
-    "hash": "d73d2d7e9c2c2060963698bda4137aeb",
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "a79ca4ce2bae6d3bd5dbed14034a914e",
     "packages": [
         {
             "name": "illuminate/support",
@@ -8,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "adb14323ecb85edfa97eb6c569c46ab09c2d258d"
+                "reference": "3416ba8aa0ceb44e80a2c53d51c8eac11716b3eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/adb14323ecb85edfa97eb6c569c46ab09c2d258d",
-                "reference": "adb14323ecb85edfa97eb6c569c46ab09c2d258d",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/3416ba8aa0ceb44e80a2c53d51c8eac11716b3eb",
+                "reference": "3416ba8aa0ceb44e80a2c53d51c8eac11716b3eb",
                 "shasum": ""
             },
             "require": {
@@ -21,9 +25,9 @@
             },
             "require-dev": {
                 "mockery/mockery": "0.7.2",
-                "patchwork/utf8": "1.0.*"
+                "patchwork/utf8": "1.1.*",
+                "phpunit/phpunit": "3.7.*"
             },
-            "time": "2013-02-16 13:26:14",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -45,15 +49,24 @@
                     "email": "taylorotwell@gmail.com"
                 }
             ],
-            "description": "Various utilities and support functions."
+            "description": "Various utilities and support functions.",
+            "time": "2013-05-12 01:10:00"
         }
     ],
-    "packages-dev": null,
+    "packages-dev": [
+
+    ],
     "aliases": [
 
     ],
     "minimum-stability": "dev",
     "stability-flags": [
+
+    ],
+    "platform": {
+        "php": ">=5.3.0"
+    },
+    "platform-dev": [
 
     ]
 }
