@@ -1,5 +1,5 @@
 Exterminator
-=========
+============
 
 **A simple debugging composer package for Laravel 4 that allows you to output color-coded variable dumps on the screen depending on whether a 'debug' cookie is present.**
 
