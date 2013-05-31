@@ -62,6 +62,11 @@ div.debug div.var-dump:hover { border-color: #aaa; }
 div.debug div.var-dump:hover h3 { color: #fff; }
 
 div.debug div.var-dump .var-area { padding-left: 24px; border-left: 1px solid #111; }
+div.debug div.var-dump .var-line { padding: 3px 0; }
+div.debug div.var-dump .var-line:hover {
+	background-color: #0b0b0b;
+	border-radius: 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px;
+}
 div.debug div.var-dump .var-length { color: yellow; }
 div.debug div.var-dump .var-key { display: inline-block; min-width: 200px; }
 div.debug div.var-dump .var-bool-true { color: #6bfa32; }

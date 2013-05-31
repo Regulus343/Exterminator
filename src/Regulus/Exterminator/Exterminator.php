@@ -188,6 +188,9 @@ class Exterminator {
 	 */
 	private static function cycleVarDumpHTML($var = false)
 	{
+		if (static::$varDumpHTML == "")
+			static::$varDumpHTML .= '<div class="var-line">';
+
 		if (is_object($var) || is_array($var)) {
 			if (is_object($var)) {
 				$var = (array) $var;
@@ -196,7 +199,9 @@ class Exterminator {
 				$type = "array";
 			}
 
-			static::$varDumpHTML .= $type.'(<span class="var-length">'.count($var).'</span>) {<div class="var-area">';
+			static::$varDumpHTML .= $type.'(<span class="var-length">'.count($var).'</span>) {';
+			static::$varDumpHTML .= '</div><!-- /var-line -->' . "\n" . '<div class="var-area">';
+			static::$varDumpHTML .= '' . "\n";
 			foreach ($var as $key => $value) {
 				if (is_int($key)) {
 					$type = "numeric";
@@ -207,14 +212,14 @@ class Exterminator {
 				}
 				static::$varDumpHTML .= '<div class="var-line"><span class="var-key">['.$quotes.'<span class="var-'.$type.'">'.$key.'</span>'.$quotes.']</span> =&gt; ';
 				if (is_object($value) || is_array($value)) {
-					//static::$varDumpHTML .= '<div>';
 					static::cycleVarDumpHTML($value);
 				} else {
 					static::cycleNonArrayVarDumpHTML($value);
+					static::$varDumpHTML .= '</div><!-- /var-line -->' . "\n";
 				}
-				static::$varDumpHTML .= '</div><!-- /var-line -->' . "\n";
 			}
-			static::$varDumpHTML .= '</div><!-- /var-area -->' . "\n" . '}';
+			static::$varDumpHTML .= '</div><!-- /var-area -->' . "\n";
+			static::$varDumpHTML .= '<div class="var-line">}</div><!-- /var-line -->' . "\n";
 		} else {
 			static::cycleNonArrayVarDumpHTML($var);
 		}
