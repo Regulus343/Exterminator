@@ -67,6 +67,6 @@ div.debug div.var-dump .var-key { display: inline-block; min-width: 200px; }
 div.debug div.var-dump .var-bool-true { color: #6bfa32; }
 div.debug div.var-dump .var-bool-false { color: #fc3330; }
 div.debug div.var-dump .var-numeric { color: #8adeff; }
-div.debug div.var-dump .var-string { color: #ffefbf; }
+div.debug div.var-dump .var-string { display: inline-block; vertical-align: top; max-width: 560px; color: #ffefbf; }
 div.debug div.var-dump .var-string:hover { color: #ffe28c; }
 div.debug div.var-dump small { font-size: 0.9em; }
