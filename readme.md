@@ -47,9 +47,9 @@ To display a variable after you have set your `debug` cookie:
 		'number'  => 3.43,
 		'string'  => 'Testing Exterminator',
 		'array'   => array(
-			'test'   => false,
-			'number' => 5,
-			'object' => (object) array(
+			'boolean' => false,
+			'number'  => 5,
+			'object'  => (object) array(
 				'Number One',
 				2,
 				3.0,
