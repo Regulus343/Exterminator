@@ -1,17 +1,16 @@
-$("a.toggle-debug").click(function(e){
+$('a.toggle-debug').click(function(e){
 	e.preventDefault();
 
 	if ($(this).text() == "Hide") {
-		$("div.debug div.var-dump").fadeOut("fast");
-		$(this).addClass("show").text("Show");
+		$('div.debug div.var-dump').fadeOut('fast');
+		$(this).addClass("show").text('Show');
 	} else {
-		$("div.debug div.var-dump").fadeIn("fast");
-		$(this).removeClass("show").text("Hide");
+		$('div.debug div.var-dump').fadeIn('fast');
+		$(this).removeClass("show").text('Hide');
 	}
 });
 
-$(".var-string, .var-numeric, .var-bool-true, .var-bool-false").click(function(){
-	console.log("whoa!");
+$('.var-string, .var-numeric, .var-bool-true, .var-bool-false').click(function(){
 	selectText($(this).get(0));
 });
 
