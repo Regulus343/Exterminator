@@ -35,7 +35,12 @@ class Exterminator {
 			return Redirect::to($uri)->withCookie(Cookie::make('debug', true, 10800));
 		}
 
-		if (Cookie::get('debug')) return true;
+		if (Cookie::get('debug'))
+			return true;
+
+		if (Session::get('developer'))
+			return true;
+
 		return false;
 	}
 
