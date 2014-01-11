@@ -6,7 +6,7 @@
 		depending on whether a 'debug' cookie is present.
 
 		created by Cody Jassman
-		last updated on May 30, 2013
+		last updated on January 10, 2014
 ----------------------------------------------------------------------------------------------------------*/
 
 use Illuminate\Support\Facades\Config;
@@ -17,10 +17,10 @@ use Illuminate\Support\Facades\URL;
 
 class Exterminator {
 
-	public static $shownCSS    = false;
-	public static $shownJS     = false;
+	public static $shownCss    = false;
+	public static $shownJs     = false;
 	public static $debugData   = array();
-	public static $varDumpHTML = "";
+	public static $varDumpHtml = "";
 
 	/**
 	 * Dumps data to the screen and exits.
@@ -159,7 +159,7 @@ class Exterminator {
 	public static function varDump($var = false, $html = true)
 	{
 		if ($html) {
-			return static::varDumpHTML($var);
+			return static::varDumpHtml($var);
 		} else {
 			ob_start();
 			var_dump($var);
@@ -174,11 +174,11 @@ class Exterminator {
 	 * @param  mixed   $var
 	 * @return string
 	 */
-	public static function varDumpHTML($var = false)
+	public static function varDumpHtml($var = false)
 	{
-		static::$varDumpHTML = '';
-		static::cycleVarDumpHTML($var);
-		return static::$varDumpHTML;
+		static::$varDumpHtml = '';
+		static::cycleVarDumpHtml($var);
+		return static::$varDumpHtml;
 	}
 
 	public static function vars()
@@ -191,10 +191,10 @@ class Exterminator {
 	 *
 	 * @param  mixed   $var
 	 */
-	private static function cycleVarDumpHTML($var = false)
+	private static function cycleVarDumpHtml($var = false)
 	{
-		if (static::$varDumpHTML == "")
-			static::$varDumpHTML .= '<div class="var-line">';
+		if (static::$varDumpHtml == "")
+			static::$varDumpHtml .= '<div class="var-line">';
 
 		if (is_object($var) || is_array($var)) {
 			if (is_object($var)) {
@@ -204,9 +204,9 @@ class Exterminator {
 				$type = "array";
 			}
 
-			static::$varDumpHTML .= $type.'(<span class="var-length">'.count($var).'</span>) {';
-			static::$varDumpHTML .= '</div><!-- /var-line -->' . "\n" . '<div class="var-area">';
-			static::$varDumpHTML .= '' . "\n";
+			static::$varDumpHtml .= $type.'(<span class="var-length">'.count($var).'</span>) {';
+			static::$varDumpHtml .= '</div><!-- /var-line -->' . "\n" . '<div class="var-area">';
+			static::$varDumpHtml .= '' . "\n";
 			foreach ($var as $key => $value) {
 				if (is_int($key)) {
 					$type = "numeric";
@@ -215,17 +215,17 @@ class Exterminator {
 					$type = "string";
 					$quotes = '"';
 				}
-				static::$varDumpHTML .= '<div class="var-line"><span class="var-key">['.$quotes.'<span class="var-'.$type.'">'.$key.'</span>'.$quotes.']</span> =&gt; ';
+				static::$varDumpHtml .= '<div class="var-line"><span class="var-key">['.$quotes.'<span class="var-'.$type.'">'.$key.'</span>'.$quotes.']</span> =&gt; ';
 				if (is_object($value) || is_array($value)) {
-					static::cycleVarDumpHTML($value);
+					static::cycleVarDumpHtml($value);
 				} else {
-					static::cycleNonArrayVarDumpHTML($value);
+					static::cycleNonArrayVarDumpHtml($value);
 				}
 			}
-			static::$varDumpHTML .= '</div><!-- /var-area -->' . "\n";
-			static::$varDumpHTML .= '<div class="var-line">}</div><!-- /var-line -->' . "\n";
+			static::$varDumpHtml .= '</div><!-- /var-area -->' . "\n";
+			static::$varDumpHtml .= '<div class="var-line">}</div><!-- /var-line -->' . "\n";
 		} else {
-			static::cycleNonArrayVarDumpHTML($var);
+			static::cycleNonArrayVarDumpHtml($var);
 		}
 	}
 
@@ -234,7 +234,7 @@ class Exterminator {
 	 *
 	 * @param  mixed   $var
 	 */
-	private static function cycleNonArrayVarDumpHTML($var = false)
+	private static function cycleNonArrayVarDumpHtml($var = false)
 	{
 		$quotes = ""; $suffix = "";
 		if (is_null($var)) {
@@ -256,8 +256,8 @@ class Exterminator {
 			$quotes = '"';
 			$suffix = ' <small>'.$type.'(<span class="var-length">'.strlen($var).'</span>)</small>';
 		}
-		static::$varDumpHTML .= $quotes.'<span class="var-'.$type.'">'.$var.'</span>'.$quotes.$suffix;
-		static::$varDumpHTML .= '</div><!-- /var-line -->' . "\n";
+		static::$varDumpHtml .= $quotes.'<span class="var-'.$type.'">'.$var.'</span>'.$quotes.$suffix;
+		static::$varDumpHtml .= '</div><!-- /var-line -->' . "\n";
 	}
 
 	/**
@@ -282,7 +282,7 @@ class Exterminator {
 	 */
 	private static function css()
 	{
-		if (!static::$shownCSS) {
+		if (!static::$shownCss) {
 			$css = file_get_contents('../vendor/regulus/exterminator/public/assets/css/exterminator.css');
 			$html = '<style type="text/css">' . "\n" . $css . "\n" . '</style>' . "\n";
 			return $html;
@@ -296,7 +296,7 @@ class Exterminator {
 	 */
 	private static function js()
 	{
-		if (!static::$shownJS) {
+		if (!static::$shownJs) {
 			$js = file_get_contents('../vendor/regulus/exterminator/public/assets/js/exterminator.js');
 			$html = '<script type="text/javascript">' . "\n" . $js . "\n" . '</script>' . "\n";
 			return $html;
